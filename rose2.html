@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Rose for Rib</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+    body {
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(to bottom right, #ffd6e0, #ffebf0);
+      font-family: 'Poppins', sans-serif;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Background Container */
+    .background-container {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    /* Background Roses */
+    .rose-bg {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .small-rose {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      background: url("https://plus.unsplash.com/premium_vector-1733419124227-82c9e39630d6?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fHJvc2V8ZW58MHx8MHx8fDA%3D") no-repeat center/contain;
+      opacity: 0.7;
+      filter: drop-shadow(0px 0px 3px pink);
+    }
+
+    /* Popping Hearts Animation */
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: pink;
+      transform: rotate(-45deg);
+      position: absolute;
+      animation: heartPop 4s infinite ease-in-out;
+    }
+
+    .heart::before, .heart::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: pink;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: 10px;
+      top: 0;
+    }
+
+    @keyframes heartPop {
+      0% {
+        transform: scale(0) rotate(-45deg);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(1.5) rotate(-45deg);
+        opacity: 0.5;
+      }
+      100% {
+        transform: scale(2) rotate(-45deg);
+        opacity: 0;
+      }
+    }
+
+    /* Central Rose */
+    .rose-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Rose Image */
+    .rose-img {
+      width: 200px;
+      height: auto;
+      filter: drop-shadow(0px 0px 10px pink);
+      border-radius: 10px;
+    }
+
+    /* Glowing Text */
+    .text {
+      font-size: 20px;
+      font-weight: bold;
+      color: #b35a7e;
+      margin-top: 10px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Background Container for Hearts & Roses -->
+<div class="background-container">
+  <div class="rose-bg"></div>
+</div>
+
+<!-- Central Rose Image -->
+<div class="rose-container">
+  <img class="rose-img" src="https://images.unsplash.com/photo-1518895949257-7621c3c786d7?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8cm9zZXxlbnwwfHwwfHx8MA%3D%3D" alt="Aesthetic Rose">
+  <div class="text">here's a rose for rib</div>
+</div>
+
+<script>
+  // Generate small roses across the background
+  const roseBg = document.querySelector('.rose-bg');
+  const numRoses = 50;
+
+  for (let i = 0; i < numRoses; i++) {
+    let rose = document.createElement('div');
+    rose.classList.add('small-rose');
+    rose.style.left = `${Math.random() * 100}vw`;
+    rose.style.top = `${Math.random() * 100}vh`;
+    rose.style.transform = `rotate(${Math.random() * 360}deg)`;
+    rose.style.opacity = Math.random() * 0.8 + 0.2;
+    roseBg.appendChild(rose);
+  }
+
+  // Generate floating hearts in the background
+  const backgroundContainer = document.querySelector('.background-container');
+  const numHearts = 20;
+
+  for (let i = 0; i < numHearts; i++) {
+    let heart = document.createElement('div');
+    heart.classList.add('heart');
+    heart.style.left = `${Math.random() * 100}vw`;
+    heart.style.top = `${Math.random() * 100}vh`;
+    heart.style.animationDelay = `${Math.random() * 4}s`;
+    backgroundContainer.appendChild(heart);
+  }
+</script>
+
+</body>
+</html>
